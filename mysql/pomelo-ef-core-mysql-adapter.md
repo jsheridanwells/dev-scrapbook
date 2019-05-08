@@ -1,5 +1,7 @@
 # MySql EF Core Adapter
 
+Here's the [project page](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql).
+
 - Install from NuGet. Currently, v 2.1.4 is compatible w/ AspNetCore App 2.1.8 & EFCore 2.1.* :
 ```bash
 $ dotnet add package Pomelo.EntityFrameworkCore.MySql --version 2.1.4
@@ -21,18 +23,19 @@ public class DbConfig
 
 // Startup.cs ConfigureServices()
 var dbConfig = Configuration.GetSection("Db")
-    .Get<DbConfig>();
+        .Get<DbConfig>();
 
-services.AddDbContextPool<ApiContext>(
-    opts => opts.UseMySql(
-        $"Server={dbConfig.Server};"
-        + $"Database={dbConfig.Database};"
-        + $"User={dbConfig.User};"
-        + $"Password={dbConfig.Password};"
-    ,
-    mySqlOptions => 
-    {
-        mySqlOptions.ServerVersion(new Version(8, 0, 15), ServerType.MySql);
-    }
-));
+    services.AddDbContextPool<ApiContext>(
+        opts => opts.UseMySql(
+            $"Server={dbConfig.Server};"
+            + $"Database={dbConfig.Database};"
+            + $"User={dbConfig.User};"
+            + $"Password={dbConfig.Password};"
+        ,
+        mySqlOptions => 
+        {
+            mySqlOptions.ServerVersion(new Version(8, 0, 15), ServerType.MySql);
+        }
+    ));
+```
 
