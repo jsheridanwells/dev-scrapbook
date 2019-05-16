@@ -13,7 +13,7 @@ Create a class to map the values to:
 public class MyConfig
 {
   public string Name { get; set; }
-  public string Secret { get; set; }
+  public string SecretCode { get; set; }
 }
 ```
 
