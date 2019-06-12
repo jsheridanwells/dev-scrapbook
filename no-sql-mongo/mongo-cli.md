@@ -13,6 +13,17 @@ Connecting to mongo shell:
 mongo
 ```
 
+List available dbs:
+```bash
+show dbs
+```
+
+Connect to a db:
+```bash
+use my_db_name
+```
+
+
 ### Setting up a new DB
 
  - Create directory for data storage
