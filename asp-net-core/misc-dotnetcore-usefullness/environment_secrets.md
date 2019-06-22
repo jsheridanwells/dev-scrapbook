@@ -2,6 +2,9 @@
 
 [Ref](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-2.2&tabs=linux)
 
+This is a useful [SHA256 secret and GUID generator(https://repl.it/@jsheridanwells/C-JWT-Secret-Generator).
+
+
 This is a *nix file system path for secrets:
 ```bash
 $ ~/.microsoft/usersecrets/<user_secrets_id>/secrets.json
