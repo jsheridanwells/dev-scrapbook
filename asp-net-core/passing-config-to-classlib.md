@@ -25,6 +25,6 @@ Then, the settings can be passed in and used in the constructor like so:
         private readonly FirebaseConfig _config;
         public Repo(IOptions<FirebaseConfig> config)
         {
-            _config = config;
+            _config = config.Value;
         }
 ```
