@@ -51,7 +51,7 @@ A custom exception that takes a message w/ details from the method that threw it
 public class LoginException: Exception
 {
    
-   private readonly string _username;
+   public string Username { get; set; }
    
    public LoginException() {}
    public LoginException(string message) : base(message) {}
@@ -59,14 +59,14 @@ public class LoginException: Exception
    protected LoginException(SerializationInfo info, StreamingContext context) : base(info, context)
    {
       if (info != null)
-         this._username = info.GetString("fUsername");
+         this.Username = info.GetString("fUsername");
    }
    
    public override void GetObjectData(SerializationInfo info, StreamingContext context)
    {
       base.GetObjectData(info, context);
       if (info != null)
-         info.AddValue("fUsername", this._username);
+         info.AddValue("fUsername", this.Username);
    }
 }
 ```
@@ -79,5 +79,18 @@ __Serialization__:
 __Deserialization__:
 1. In the constructor, we restore whatever fields we need.
 
-
+Calling the exception
+```csharp
+public async Task Login(string username, string password)
+{
+   try
+   {
+      // do the thing to log in.
+   }
+   catch(Exception e)
+   {
+      throw new LoginException("log in failed", e) { Username = username };
+   }
+}
+```
 
