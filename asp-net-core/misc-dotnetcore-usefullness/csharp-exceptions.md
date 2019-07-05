@@ -1,6 +1,13 @@
 # C# Custom Exceptions Best Practices
 
-[Source](https://stackify.com/csharp-exception-handling-best-practices/)
+__Sources:__
+[Stackify](https://stackify.com/csharp-exception-handling-best-practices/)
+
+[Gurock](https://blog.gurock.com/articles/creating-custom-exceptions-in-dotnet/#minimal)
+
+[Doug Seelinger](https://blogs.msdn.microsoft.com/agileer/2013/05/17/the-correct-way-to-code-a-custom-exception-class/)
+
+
 
 Exceptions in C# are basically `try catch finally throw`.
 
@@ -42,8 +49,6 @@ finally
 - SqlClient.SqlException - SQL Server exceptions
 - Invalid Operation Exception - generic exception found in many libraries
 - Object Disposed Exception - calling  method on an object that isn't there.
-
-More [from here](https://blog.gurock.com/articles/creating-custom-exceptions-in-dotnet/#minimal)....
 
 A custom exception that takes a message w/ details from the method that threw it:
 ```csharp
