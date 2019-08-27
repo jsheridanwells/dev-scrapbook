@@ -46,4 +46,4 @@ export class ArtieService extends BaseApiService {
 }
 ```
 
-Now your derived services can focus on just data management and your components are complete separated from your web API. Yay!
+Now your derived services can focus on just data management and your components are completely separated from your web API. Yay!
