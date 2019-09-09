@@ -37,6 +37,8 @@ Load your theme into the entry .scss file (styles.scss or whatever)"
 }
 ```
 
+[This site](https://www.materialpalette.com/) is helpful for selecting palettes.
+
 II. [Alternate Theming File Example](https://material.angular.io/guide/theming)
 ```scss
 @import '~@angular/material/theming';
