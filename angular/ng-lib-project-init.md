@@ -55,4 +55,4 @@ export * from './lib/my-lib-component/my-lib-component';
 
 When the component is added to the module exports, the element is consumable in an application; when the component is listed in the public-api.ts, the class itself can be referenced in another application.
 
-
+Since Angular CLI v7, you can hot reload and incrementally build your library using: `$ ng build my-lib --watch`.
