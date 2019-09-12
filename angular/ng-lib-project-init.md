@@ -1,7 +1,7 @@
 # Initializing Angular Library Projects
 
 [From....](https://blog.angularindepth.com/creating-a-library-in-angular-6-87799552e7e5)  [and....](https://blog.angularindepth.com/angular-workspace-no-application-for-you-4b451afcc2ba)
-[and this example repo....(https://github.com/t-palmer/example-ng6-lib/tree/master/src/app)]
+[and this example repo....](https://github.com/t-palmer/example-ng6-lib/tree/master/src/app)
 
 #### Since Angular 7 cli...
 
