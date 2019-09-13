@@ -46,7 +46,7 @@ Make `angular.json` know about it:
 }
 ```
 
-Make `ng-builder` know about it:
+Make `ng-builder` know about it (in projects/my-lib/ng-packagage.json:
 ```json
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
