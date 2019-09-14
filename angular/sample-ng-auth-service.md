@@ -1,8 +1,8 @@
 # Sample Angular Auth Service
 
-```typescript
+[Desde....](https://blog.angular-university.io/angular-jwt-authentication/)
 
-// from: https://blog.angular-university.io/angular-jwt-authentication/
+```typescript
 
 
 import * as moment from "moment";
