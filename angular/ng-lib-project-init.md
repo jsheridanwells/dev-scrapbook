@@ -62,6 +62,8 @@ Since Angular CLI v7, you can hot reload and incrementally build your library us
 
 ### Build Error Workarounds
 
+[From this github issue](https://github.com/ng-packagr/ng-packagr/issues/413)
+
 If you have type annotations in comments, ng-packagr produces an annoying build error, eg:
 ```bash
 warning TS0: @class annotations are redundant with TypeScript equivalents
