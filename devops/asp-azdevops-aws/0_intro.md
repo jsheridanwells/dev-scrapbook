@@ -7,7 +7,7 @@ which creates a build, which sends the artifacts to an AWS S3 bucket, which then
 
 __Contents:__
 
-1. [Setting up an Asp.Net Core WebApi and Tests]()
+
 1. [Prepping an EC2 instance to run Apache]()
 1. [Creating a release for Linux]()
 1. [Building the artifacts in Azure DevOps]()
