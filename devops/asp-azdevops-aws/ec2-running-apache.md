@@ -110,7 +110,7 @@ III. Set up proxy server configuration
 
 Restart Apache
 
-IV. Set up dotnet runtime (Follow MS's CentOD instructions)
+IV. Set up dotnet runtime (Follow MS's CentOS instructions)
 ```bash
 sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
 
