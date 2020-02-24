@@ -80,25 +80,25 @@ I. Set up instance
             "Resource": "*"
         }
     ]
-} 
+}
  ```
  - Add a tag that will be used in your CodeDeploy deployment group
  - Create a security group with these rules (this is probably insecure, but works for prototyping):
- 
+
  HTTP | TCP | 80 | 0.0.0/0
- 
+
  HTTP | TCP | 80 | ::/0
- 
+
  SSH | TCP | 22 | < Add Your IP >
- 
+
  II. Installing Apache
   - Install it `sudo yum update` | `sudo yum install httpd`
    - Start it to see if it works: `sudo systemctl start httpd`
    - Set it to start on system reboot: `sudo systemctl enable httpd`
    - Add port :80 to firewall: `firewall-cmd --permanent --zone=public --add-service=http`
-  
+
 III. Set up proxy server configuration
-- In __/etc/httpd/conf.d/ create MY_APP.conf:
+- In `/etc/httpd/conf.d/` create MY_APP.conf:
 ```xml
 <VirtualHost *:80>
   ProxyPreserverHost On
@@ -106,11 +106,50 @@ III. Set up proxy server configuration
   ProxyPassReverse / http://127.0.0.1:5000
 </VirtualHost>
 ```
-(There's more, but this will work for now)
+(There's more below, but this will work for now)
 
-Restart Apache
+ - Test the config:
+ ```bash
+ sudo service httpd configtest
+ ```
+ - Restart Apache `sudo systemctl restart httpd`
 
-IV. Set up dotnet runtime (Follow MS's CentOS instructions)
+ IV. Use systemd to manage Kestrel processes:<br>
+ - Create the definition file:
+ ```bash
+sudo vi /etc/systemd/system/kestrel-helloapp.service
+ ```
+ - Example file
+ ```
+[Unit]
+Description=Example .NET Web API App running on CentOS 7
+
+[Service]
+WorkingDirectory=/var/www/helloapp
+ExecStart=/usr/local/bin/dotnet /var/www/helloapp/helloapp.dll
+Restart=always
+# Restart service after 10 seconds if the dotnet service crashes:
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=dotnet-example
+User=apache
+Environment=ASPNETCORE_ENVIRONMENT=Production 
+
+[Install]
+WantedBy=multi-user.target
+ ```
+- enable the Kestrel app service:
+```bash
+sudo systemctl enable kestrel-helloapp.service
+```
+
+- viewing logs - journalctrl w/ arguments can filter all service logs for those related to the .net app:
+```bash
+sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-10-18 04:00"
+```
+`-fu` for specifying name of service, `--since` and `--until` for date ranges
+
+IV. Set up dotnet runtime ([Follow MS's CentOS instructions](https://docs.microsoft.com/en-us/dotnet/core/install/linux-package-manager-centos7))
 ```bash
 sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
 
@@ -121,7 +160,28 @@ sudo yum install aspnetcore-runtime-3.1
 sudo yum install dotnet-runtime-3.1
 ```
 
+_sources:_<br>
+[docs.microsoft.com](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-apache?view=aspnetcore-3.1)
 
 
- 
- 
+
+
+(Here's a longer Apache .conf file as an example):
+```xml
+<VirtualHost *:*>
+    RequestHeader set "X-Forwarded-Proto" expr=%{REQUEST_SCHEME}
+</VirtualHost>
+
+<VirtualHost *:80>
+    ProxyPreserveHost On
+    ProxyPass / http://127.0.0.1:5000/
+    ProxyPassReverse / http://127.0.0.1:5000/
+    ServerName www.example.com
+    ServerAlias *.example.com
+    ErrorLog ${APACHE_LOG_DIR}helloapp-error.log
+    CustomLog ${APACHE_LOG_DIR}helloapp-access.log common
+</VirtualHost>
+```
+
+
+
