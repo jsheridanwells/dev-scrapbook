@@ -1,6 +1,6 @@
 # Building Artifacts in Azure DevOps
 
-The following config builds, tests, publishes and drops a linux artifact in dotnetcore 3.1. The artifact name contains the build number for versioning
+The following config builds, tests, publishes and drops a linux artifact in dotnetcore 3.1. The artifact name contains the build number for versioning. ([Thisblog was helpful](https://www.hanselman.com/blog/SettingUpAzureDevOpsCICDForANETCore31WebAppHostedInAzureAppServiceForLinux.aspx))
 ```yaml
 trigger:
 - master
