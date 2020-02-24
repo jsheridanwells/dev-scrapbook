@@ -59,6 +59,7 @@ B. Create service role for CodeDeploy
                     "codedeploy.us-west-1.amazonaws.com",
                     "codedeploy.us-west-2.amazonaws.com",
                     "codedeploy.eu-west-3.amazonaws.com",
+                ]
             },
             "Action": "sts:AssumeRole"
         }
