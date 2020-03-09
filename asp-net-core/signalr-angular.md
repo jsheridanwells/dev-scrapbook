@@ -1,4 +1,4 @@
-# SignalR with .NEw Core and Angular
+# SignalR with .Net Core and Angular
 
 [source](https://code-maze.com/netcore-signalr-angular/).
 
