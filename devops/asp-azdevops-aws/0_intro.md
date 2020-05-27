@@ -13,4 +13,5 @@ __Contents:__
 1. [Sending the artifacts to an AWS S3 bucket](./3_send-to-AWS-S3-bucket.md)
 1. [Using CodeDeploy to stage artifacts from S3 to the EC2 instance](/4_stage_Artifacts_w_code_deploy.md)
 
+
 Also, to get started install [AWS Tools for VSTS](https://aws.amazon.com/vsts/) on your TFS server or Azure DevOps instance.
