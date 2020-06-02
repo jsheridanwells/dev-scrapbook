@@ -1,6 +1,6 @@
 # AWS Deploying and Provisioning
 
-###### [From LikedInLearning](https://www.linkedin.com/learning/aws-deploying-and-provisioning/architect-apps-for-horizontal-scaling?collection=urn%3Ali%3AlearningCollection%3A6404794025735389185&u=78655346)
+###### [From LinkedInLearning](https://www.linkedin.com/learning/aws-deploying-and-provisioning/architect-apps-for-horizontal-scaling?collection=urn%3Ali%3AlearningCollection%3A6404794025735389185&u=78655346)
 
 ## EC2
 
@@ -22,7 +22,7 @@ ELB Classic provides above scenario, but now we have Application Load Balancer (
  - Listens for HTTP/S on any port
  - Integrates with AWS Certificate Manager
  - Operates on request level
- - Feature is it can take en/decryption load off of servers
+ - Feature is it can take TLS en/decryption load off of servers
 
 ### NLB Provides:
  - Level 4
@@ -32,7 +32,7 @@ ELB Classic provides above scenario, but now we have Application Load Balancer (
  - Can be assigned to static IP addresses
  - Multiple ports on a single instance
  - BUT - No TLS termination
- - This is good for end-to-end encryption, packet is encrypted until it reaches the server
+ - This is good for end-to-end encryption, packet is encrypted until it reaches the application server
 
 ## Autoscaling
  - __Vertical Scaling__: changing EC2 type which would require a reboot and downtime
@@ -137,8 +137,3 @@ __ASG__s -> react to -> __Policy Events__ -> take an -> __Action__ -> to remove 
  - client-server security group model
  - keep data in private subnets
  - patch system-use ALB w/ TLS configured
-
-
-
-
-
