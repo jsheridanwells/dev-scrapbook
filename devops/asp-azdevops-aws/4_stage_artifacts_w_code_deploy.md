@@ -92,7 +92,8 @@ C. Create an IAM instance profile for EC2 instances
  - Choose Roles -> Create Role
  - Choose AWS Service -> EC2, Select Use Case -> EC2
  - Permissions: Add policy from previous step.
- - Role Name (Eg. `CodeDeply-EC2-Instance-Profile`)
+ - Role Name (Eg. `CodeDeploy-EC2-Instance-Profile`)
+ - Make sure EC2 instance is running under this role
 
 D. Create an AzureDevOps user to run AWS services from AzureDevOps
  - In IAM, create a user, (eg. `AWS_AzureDevOpsUser`)
