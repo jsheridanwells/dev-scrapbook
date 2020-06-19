@@ -29,4 +29,5 @@ Communicates between ECS and the instance.
 A group of ECS Container instances
 
 This diagram was awesome:
+
 ![ECS Diagram](https://cdn-media-1.freecodecamp.org/images/wRtGhAtM8NLLnpTkp4PAUc80YHObxKVnFFhM)
