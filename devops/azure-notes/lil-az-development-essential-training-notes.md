@@ -1,4 +1,4 @@
-# Azure Development Essential Training Notes
+# Azure Development Essential Training 1 Notes
 
 [Via LinkedIn Learning](https://www.linkedin.com/learning/azure-development-essential-training-1-azure-roadmap-and-key-features/welcome?pathUrn=urn%3Ali%3AlyndaLearningPath%3A5b0728e5498e4ef31386867c&u=78655346)
 
