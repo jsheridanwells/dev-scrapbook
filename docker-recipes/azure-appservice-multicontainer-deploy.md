@@ -90,13 +90,14 @@ $ az role assignment create --assignee <principal-id> --scope /subscriptions/<su
 
 Replace the following values:
 
-<principal-id> with the service principal ID from the az webapp identity assign command
-<registry-name> with the name of your container registry
-<subscription-id> with the subscription ID retrieved from the az account show command
+`<principal-id>` with the service principal ID from the az webapp identity assign command
+
+`<registry-name>` with the name of your container registry
+
+`<subscription-id>` with the subscription ID retrieved from the az account show command
 
  - Add container location to the web app config
  ```bash
 $ az webapp config container set --name <app-name> --resource-group AppSvc-DockerTutorial-rg --docker-custom-image-name <registry-name>.azurecr.io/appsvc-tutorial-custom-image:latest --docker-registry-server-url https://<registry-name>.azurecr.io
  ```
 
- 
