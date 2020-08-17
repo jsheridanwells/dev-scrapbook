@@ -106,3 +106,7 @@ Replace the following values:
 $ az webapp config container set --name <app-name> --resource-group AppSvc-DockerTutorial-rg --docker-custom-image-name <registry-name>.azurecr.io/appsvc-tutorial-custom-image:latest --docker-registry-server-url https://<registry-name>.azurecr.io
  ```
 
+To update, rebuild, retag, and push image, then
+```bash
+$ az webapp restart --name <app_name> --resource-group AppSvc-DockerTutorial-rg
+```
