@@ -68,6 +68,11 @@ $ az acr repository list -n <registry-name>
 $ az appservice plan create --name AppSvc-DockerTutorial-plan --resource-group AppSvc-DockerTutorial-rg --is-linux
 ```
 
+ - Create the web app if it hasn't been created
+ ```bash
+ $ az webapp create --resource-group AppSvc-DockerTutorial-rg --plan AppSvc-DockerTutorial-plan --name <app-name> --deployment-container-image-name <registry-name>.azurecr.io/appsvc-tutorial-custom-image:latest
+ ```
+
  - Use this command to add any environment settings
 ```bash
 $ az webapp config appsettings set --resource-group AppSvc-DockerTutorial-rg --name <app-name> --settings WEBSITES_PORT=8000
