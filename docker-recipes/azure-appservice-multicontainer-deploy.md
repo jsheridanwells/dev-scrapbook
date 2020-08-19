@@ -110,3 +110,16 @@ To update, rebuild, retag, and push image, then
 ```bash
 $ az webapp restart --name <app_name> --resource-group AppSvc-DockerTutorial-rg
 ```
+
+## Other usefullness
+
+Enable filesystem logging (Portal - App Services -> MyApp  :  Turn Application Logging on, set quota and retention
+
+You can click "Log Stream" in App Services portal, or to view them in local terminal:
+```cmd
+az webapp log tail --name myApp --resource-group myRg
+```
+
+
+
+
