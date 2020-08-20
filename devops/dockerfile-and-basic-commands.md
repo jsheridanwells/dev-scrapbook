@@ -17,7 +17,7 @@ Note, container shuts down once main process stops.
 
 ### Commands
 
- - `$ docker build -t MY_CONTAINER_NAME` builds the container. `-t` sets the name
+ - `$ docker build -t MY_CONTAINER_NAME . ` builds the container. `-t` sets the name. Don't forget `.` to find the Dockerfile
  - `$ docker run -ip 5000:5000 MY_CONTAINER_NAME:latest` runs the container. `-i` means interactive. `-p` maps the port HOST_PORT:CONTAINER_PORT
 
 
