@@ -3,6 +3,7 @@
 ## Basics
 
 - For consistent, repeatable tests
+- Built on .NET
 - Works with built-in providers
 - Talks to AD, registry, and WMI
 - Bridges gap between previous languages with aliases
@@ -60,6 +61,12 @@ Get-Member
   - `| Get-Member` is usefull for displaying all props and methods on a cmdlet, e.g.:
    - `Get-Help | Get-Member` will show all props and methods on `Get-Help`
 
+## Pipelines
+ - Like an assembly line for objects, and not just strings like in BATs or .sh files
+ - `Get-Member` shows all properties and methods
+ - Status, Name, and DisplayName are default displayed properties
+
+
 ## Functions
  - Used and accessed just like cmdlets.
  - You can make your own functions
@@ -102,12 +109,43 @@ Then `add` will display `4`
  - Scripts can also be run remotely with PS ISE
 
 ## Modules
+ - `Get-Module` no args will show all of the modules loaded into the session. IF you add a module, it will show here.
  - `Get-Module -List-Available` will show modules available on system. PS now loads modules automatically if called.
  - `Import-Module -Name applocker` will explicitly load a module (useful on servers)
+ - `Remove-Module` takes a module our of the current session (but not the file system)
  - Microsoft Script Gallery is a library of community-generated scripts
  - Execution policy only trusts scripts created locally by default. `Set-ExecutionPolicy` can allow downloaded scripts to run, or run a locally-developed script on a server
+ - Displayed in `Get-Command` under `Source`
 
 `-Async` attached to a command will run it in a detached mode.
+
+## Functions
+ - Your own commands
+ - `Get-Command |Group-Object -Property CommandType` 
+ - Difference between function and cmdlet is cmdlet is compiled code
+ - function < Function Name > {  } - is basic syntax. Whatever command/args combos you want go in the curly brace block, then gets run whenever < Function Name > gets called.
+ - `param([Parameter()] [type] $ParamName)` for getting parameters
+
+## Sessions
+ - Powershell allows sessions for running commands on a remote computer
+ - `Enable-PsRemoting` is run on Windows Server to allow connections
+ - Run the same command on local client machine with `-SkipNetworkProfileCheck`
+ - `$credential = GetCredential` will allow you to reserver login/password in a variable for running commands on rmeote machine
+ - The client machine has to trust the remote host: `Set-Item WSMAN:\localhost\Client\TrustedHosts -Value 10.0.0.6`
+ - `Invoke-Command -ComputerName 10.0.0.6 -Credential $credential -ScriptBlock { hostname }` -> this will run `hostname` on the remote machine.
+
+ - OpenSSH is an easy way to connect to Linux machines
+ - install `sudo apt-get install openssh-server`
+ - modify the ssh config: `sudo vi /etc/ssh/sshd_config`, add this line:
+ ```
+SubSystem powershell /usr/bin/pwsh -sshs -NoLogo -NoProfile
+ ```
+ (this assumes powershell core is already installed)
+ - also in config, make sure password auth is enabled
+ - Restart the SSH daemon: `sudo service sshd restart`
+ - `Install-Module WindowsCompatibility`, then
+ - `Invoke-WinCommand -ScriptBlock { get-clipboard }` allows you to run Powershell commands that don't exist in Powershell Core on a Windows system.
+
 
 ## Azure Powershell
  - Everything is done through the Azure Resource Manager
