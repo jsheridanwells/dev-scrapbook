@@ -166,7 +166,12 @@ app.use(express.static(clientDir));
     "prod": "concurrently -k \"npm run clean && npm run cp:www && ng build --aot --prod && tsc -p ./api/tsconfig.api.json && cd ./dist/api && node ./bin/www\"",
 ```
 
-Note: `clean` will start the compilation directory fresh if necessary, `cp:www` is necessary because `api/bin/www` is skipped in the Typescript transpilation, then `dev` builds both Angular and Express.js assets and watches for changes. 
-`prod` is for production.
+Note: 
+ - `clean` will start the compilation directory fresh if necessary 
+ - `cp:www` is necessary because `api/bin/www` is skipped in the Typescript transpilation 
+ - `dev` builds both Angular and Express.js assets and watches for changes using nodemon and the Angular CLI
+ - `prod` is for production.
+ 
+6. Both the client assets and the API processes should be viewable from `localhost:3000`.
 
 
