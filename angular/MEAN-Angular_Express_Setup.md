@@ -5,10 +5,28 @@
 ng new MyProject --create-application=false --new-project-root=.
 ```
 
-2. Create the Angular client application
+2a. Create the Angular client application
 ```bash
 ng g application ClientApp 
 # and add whatever other preferences you have, e.g. scss, routing, etc.
+```
+
+2b. Change the build `outputPath` directory. Output for the entire project will be in `./dist`, but client files will go to `public` as this is more idiomatic for an Express.js app:
+```json
+"projects": {
+  "":"...",
+  "client": {
+    "":"...",
+    "architect": {
+      "":"...",
+      "build": {
+        "options": {
+          "outputPath": "dist/public"
+        }
+      }
+    }
+   }
+}
 ```
 
 3a. Create an API or other directory for Node.js processes or Express.js
@@ -111,13 +129,33 @@ function onListening() {
 }
 ```
 
-4. Create `app.ts` as entry for all transpiled source code (from here, add your Express types and bootstrap the Express application as you prefer). 
+4a. Create `app.ts` as entry for all transpiled source code (from here, add your Express types and bootstrap the Express application as you prefer). 
 Note, that the express app will serve the static files that the Angular client app transpiles to:
 ```typescript
 const clientDir = express.static(path.join(__dirname, '../public'));
 app.use(express.static(clientDir));
 ```
 
+4b. Create a tsconfig extension in the `api` directory to extend the tsconfig that comes with Angular: `touch ./api/tsconfig.api.json
+```json
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+      "baseUrl": "../",
+      "module": "CommonJS",
+      "resolveJsonModule": false,
+      "esModuleInterop": false,
+      "target": "ESNext",
+      "outDir": "../dist/api",
+      "sourceMap": true,
+      "types": [
+        "node"
+      ],
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true
+    }
+  }
+```
 
 
 5. In `package.json`, add the following scripts to help with transpiling. Note, install `concurrently` and `nodemon` globally:
@@ -126,8 +164,9 @@ app.use(express.static(clientDir));
     "cp:www": "mkdir -p ./dist/api/bin && cp api/bin/www ./dist/api/bin/",
     "dev": "concurrently -k \"tsc -p ./api/tsconfig.api.json -w\" \"cd ./dist/api && nodemon ./bin/www --watch\" \"clear && ng build --watch\"",
     "prod": "concurrently -k \"npm run clean && npm run cp:www && ng build --aot --prod && tsc -p ./api/tsconfig.api.json && cd ./dist/api && node ./bin/www\"",
-    ```
-Note: `clean` will start the compilation directory fresh if necessary, `cp:www` is necessary because 'api/bin/www` is skipped in the Typescript transpilation, then `dev` builds both Angular and Express.js assets and watches for changes. 
+```
+
+Note: `clean` will start the compilation directory fresh if necessary, `cp:www` is necessary because `api/bin/www` is skipped in the Typescript transpilation, then `dev` builds both Angular and Express.js assets and watches for changes. 
 `prod` is for production.
 
 
