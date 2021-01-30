@@ -4,18 +4,14 @@ This set up will run a Mongo Database from a container for development. We can a
 
 ## Scripts and Mongo Directory
 
-Make this directory at the root of the project:
+Make this directory at the root of the project, and add thse files:
 ```
-/Scripts
- - /Mongo
- - - /mongodb
- - - /mongodbinit
- - - - mongoInit.js
- - - - .dbshell
- - - /mongodb_seed
- - - - Dockerfile
- - - - MOCK_DATA.json
- - - - mongo_seed.sh
+$ mkdir -p ./scripts/mongo{init,seed}
+        new file:   scripts/mongo/init/.dbshell
+        new file:   scripts/mongo/init/mongoInit.js
+        new file:   scripts/mongo/seed/Dockerfile
+        new file:   scripts/mongo/seed/MOCK_DATA.json
+        new file:   scripts/mongo/seed/mongo_seed.sh
 ```
 
 These are the files:
