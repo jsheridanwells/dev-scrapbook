@@ -1,0 +1,146 @@
+{
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+
+    "defaultProfile": "{7f586916-8357-53d4-bb2b-ca96f639898a}",
+    // You can add more global application settings here.
+    // To learn more about global settings, visit https://aka.ms/terminal-global-settings
+    // If enabled, selections are automatically copied to your clipboard.
+    "copyOnSelect": true,
+    // If enabled, formatted data is also copied to your clipboard
+    "copyFormatting": false,
+    "confirmCloseAllTabs": false,
+    "launchMode": "maximized",
+    "alwaysShowTabs": false,
+    "showTabsInTitlebar": false,
+    "showTerminalTitleInTitlebar": false,
+    // A profile specifies a command to execute paired with information about how it should look and feel.
+    // Each one of them will appear in the 'New Tab' dropdown,
+    //   and can be invoked from the commandline with `wt.exe -p xxx`
+    // To learn more about profiles, visit https://aka.ms/terminal-profile-settings
+    "profiles":
+    {
+        "defaults":
+        {
+            
+            // Put settings here that you want to apply to all profiles.
+            "useAcrylic": true,
+            "acrylicOpacity": 0.8,
+            "guid": "{7f586916-8357-53d4-bb2b-ca96f639898a}"
+        },
+        "list":
+        [
+            {
+                "guid": "{7f586916-8357-53d4-bb2b-ca96f639898a}",
+                "hidden": false,
+                "name": "WLinux",
+                "source": "Windows.Terminal.Wsl",
+                "colorScheme": "Afterglow",
+                "startingDirectory": "\\\\wsl$\\WLinux\\home\\jsheridanwells\\workspace",
+                "fontFace": "Cascadia Code PL",
+                "fontSize": 10
+            },
+            {
+                // Make changes here to the powershell.exe profile.
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "name": "Windows PowerShell",
+                "commandline": "powershell.exe",
+                "hidden": false,
+                "fontFace": "Cascadia Mono PL",
+                "startingDirectory": "%USERPROFILE%\\Workspace"
+            },
+            {
+                // Make changes here to the cmd.exe profile.
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "name": "Command Prompt",
+                "commandline": "cmd.exe",
+                "hidden": false,
+                "startingDirectory": "\\"
+            },
+            
+            {
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "hidden": false,
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
+            },
+            {
+                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+                "hidden": false,
+                "name": "Ubuntu-20.04",
+                "source": "Windows.Terminal.Wsl"
+            }
+        ]
+    },
+
+    // Add custom color schemes to this array.
+    // To learn more about color schemes, visit https://aka.ms/terminal-color-schemes
+    "schemes": [
+        {
+            "name": "IC_Green_PPL",
+            "black": "#014401",
+            "red": "#ff2736",
+            "green": "#41a638",
+            "yellow": "#76a831",
+            "blue": "#2ec3b9",
+            "purple": "#50a096",
+            "cyan": "#3ca078",
+            "white": "#e6fef2",
+            "brightBlack": "#035c03",
+            "brightRed": "#b4fa5c",
+            "brightGreen": "#aefb86",
+            "brightYellow": "#dafa87",
+            "brightBlue": "#2efaeb",
+            "brightPurple": "#50fafa",
+            "brightCyan": "#3cfac8",
+            "brightWhite": "#e0f1dc",
+            "background": "#2c2c2c",
+            "foreground": "#e0f1dc"
+        },
+        {
+            "name": "Afterglow",
+            "black": "#151515",
+            "red": "#ac4142",
+            "green": "#7e8e50",
+            "yellow": "#e5b567",
+            "blue": "#6c99bb",
+            "purple": "#9f4e85",
+            "cyan": "#7dd6cf",
+            "white": "#d0d0d0",
+            "brightBlack": "#505050",
+            "brightRed": "#ac4142",
+            "brightGreen": "#7e8e50",
+            "brightYellow": "#e5b567",
+            "brightBlue": "#6c99bb",
+            "brightPurple": "#9f4e85",
+            "brightCyan": "#7dd6cf",
+            "brightWhite": "#f5f5f5",
+            "background": "#212121",
+            "foreground": "#d0d0d0"
+          }
+    ],
+    "keybindings": [
+        { "command": "closePane", "keys": "alt+shift+w"}
+    ],
+
+    // Add custom actions and keybindings to this array.
+    // To unbind a key combination from your defaults.json, set the command to "unbound".
+    // To learn more about actions and keybindings, visit https://aka.ms/terminal-keybindings
+    "actions":
+    [
+        // Copy and paste are bound to Ctrl+Shift+C and Ctrl+Shift+V in your defaults.json.
+        // These two lines additionally bind them to Ctrl+C and Ctrl+V.
+        // To learn more about selection, visit https://aka.ms/terminal-selection
+        { "command": {"action": "copy", "singleLine": false }, "keys": "ctrl+c" },
+        { "command": "paste", "keys": "ctrl+v" },
+
+        // Press Ctrl+Shift+F to open the search box
+        { "command": "find", "keys": "ctrl+shift+f" },
+
+        // Press Alt+Shift+D to open a new pane.
+        // - "split": "auto" makes this pane open in the direction that provides the most surface area.
+        // - "splitMode": "duplicate" makes the new pane use the focused pane's profile.
+        // To learn more about panes, visit https://aka.ms/terminal-panes
+        { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "alt+shift+d" },
+        { "command": "toggleFocusMode", "keys": "f11" }
+    ]
+}
