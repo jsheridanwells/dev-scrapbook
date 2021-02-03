@@ -1,35 +1,36 @@
-# last update 17 Apr 2020 -Jw
+# Last update 2021-02-03 -@jsheridanwells
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/jeremywells/.oh-my-zsh"
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+export ZSH="/home/jsheridanwells/.oh-my-zsh"
 
+# oh-my-zsh theme
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="arrow"
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
-
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
-
-plugins=(
-  git node bundler osx rake ruby
-)
-
+# oh-my-zsh plugins
+plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
-# autojump
-[[ -s /Users/jeremywells/.autojump/etc/profile.d/autojump.sh ]] && source /Users/jeremywells/.autojump/etc/profile.d/autojump.sh
-
-# GENERAL
-
-alias c='clear'
-alias ca='clear &&'
-alias la='ls -la'
-alias c-="code ."
-alias rid="rider"
-alias ws="webstorm"
+# MY STUFF
+# General Aliases
+alias c="clear"
+alias l="ls -la"
+alias wr="cd /mnt/c/Users/jsheridanwells"
+alias ws="webstorm . </dev/null &>/dev/null &"
 alias h="history"
 alias hg="history grep | "
+alias cv="command -v"
+
+# GETTING AROUND
+alias repo="pushd ~/workspace && clear && ls"
+alias workspace="pushd ~/workspace && clear && ls"
+alias tut="pushd ~/workspace/tutorials && clear && ls"
+alias exp="pushd ~/workspace/experiments && clear && ls"
+alias proj="pushd ~/workspace/projects && clear && ls"
+alias temp="pushd ~/workspace/temp && clear && ls"
 
 # GIT ALIASES
 alias g='git'
@@ -49,9 +50,10 @@ alias glog='git log --oneline --decorate --graph --all'
 alias grao='git remote add origin'
 alias gpom='git push origin master'
 
-# NPM ALIASES
+# NODE/NPM ALIASES
 alias ninit="npm init"
 alias nr="npm run"
+alias ns="npm run start"
 alias nrs="npm run serve"
 alias nrws="npm run webservice"
 alias nt="npm test"
@@ -64,6 +66,7 @@ alias nun="npm uninstall --save"
 
 # PYTHON ALIASES
 alias py="python3"
+alias python="python3"
 alias vact=". venv/bin/activate"
 
 #DOTNET ALIASES
@@ -75,77 +78,64 @@ alias dnr="dotnet run"
 alias dnwr="dotnet watch run"
 alias dnb="dotnet build"
 
-#NODE ALIASES
-alias ns="npm run start"
-
 # RUBY BUNDLER &/| JEKYLL
 alias be="bundle exec"
 alias js="bundle exec jekyll serve"
 alias jst="JEKYLL_ENV=test bundle exec jekyll serve"
 alias jsp="JEKYLL_ENV=production bundle exec jekyll serve"
 
-# Create standard .gitignore for .net core projects...
-alias dn-gitignore="cp ~/git_templates/gitignore_templates/.gitignore-dotnetcore ./.gitignore"
-#... and for flask projects
-alias f-gitignore="cp ~/git_templates/gitignore_templates/.gitignore-flask ./.gitignore"
-#... and python
-alias py-gitignore="cp ~/git_templates/gitignore_templates/.gitignore-python ./.gitignore"
-
-# list tree (requires brew install exa) (eg. lt 2 for tree w/ depth of 2)
-# alias l="exa --long --header --git"
-# alias li="exa --long --header --git --git-ignore"
-
-alias ls="lsd"
-alias l="ls -l"
-alias la="ls -a"
-alias lla="ls -la"
-alias lt="ls --tree"
-
-# list files as tree
-# lt () {
-#     if [ -z "$1" ]
-#         then
-#             exa --long --tree --git --git-ignore --header
-#         else
-#             exa --long --tree --git --git-ignore --header --level $1
-#     fi
-# }
-
-# GETTING AROUND
-alias workspace="pushd ~/workspace && clear && ls"
-alias tut="pushd ~/workspace/tutorials && clear && ls"
-alias exp="pushd ~/workspace/experiments && clear && ls"
-alias proj="pushd ~/workspace/projects && clear && ls"
-
-
-# rbenv
-eval export PATH="/Users/jeremywells/.rbenv/shims:${PATH}"
-export RBENV_SHELL=zsh
-source '/usr/local/Cellar/rbenv/1.1.2/libexec/../completions/rbenv.zsh'
-command rbenv rehash 2>/dev/null
-rbenv() {
-  local command
-  command="${1:-}"
-  if [ "$#" -gt 0 ]; then
-    shift
-  fi
-
-  case "$command" in
-  rehash|shell)
-    eval "$(rbenv "sh-$command" "$@")";;
-  *)
-    command rbenv "$command" "$@";;
-  esac
+## Make life easier
+### PATH formatting
+### see: https://www.cyberciti.biz/faq/howto-print-path-variable/
+function path(){
+  echo $PATH | tr ":" "\n" | nl
 }
 
-# NVM
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+## Tool startup
 
-# DOCKER
+autoload -U compinit && compinit -u
+### X server
+export DISPLAY=${DISPLAY:-$(grep -Po '(?<=nameserver ).*' /etc/resolv.conf):0}
+export LIBGL_ALWAYS_INDIRECT=1
 
-# Make column format available when listing images
+### nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+### use .nvmrc if found
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
+### rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+### docker
+### Make column format available when listing images
 export COL="\nID\t{{.ID}}\nIMAGE\t{{.Image}}\nCOMMAND\t{{.Command}}\nCREATED\t{{.RunningFor}}\nSTATUS\t{{.Status}}\nPORTS\t{{.Ports}}\nNAMES\t{{.Names}}\n"
 
-# POSTGRES
-PATH=/Library/PostgreSQL/12/bin:$PATH
+### autojump
+[[ -s /home/jsheridanwells/.autojump/etc/profile.d/autojump.sh  ]] && source /home/jsheridanwells/.autojump/etc/profile.d/autojump.sh
+
+autoload -U compinit && compinit -u
+
+## Temp abbreviations for active projects
+alias bd="cd ~/workspace/projects/BeautifulDay && vi ."
