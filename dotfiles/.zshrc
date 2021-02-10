@@ -103,7 +103,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 ### use .nvmrc if found
-[ -f ~/.nvrm_startup ] || source ~/.nvm_startup
+if [ -f ~/.nvrm_startup ]; then source ~/.nvm_startup fi
 
 # autoload -U add-zsh-hook
 # load-nvmrc() {
@@ -127,7 +127,7 @@ export NVM_DIR="$HOME/.nvm"
 # load-nvmrc
 
 ### rbenv
-[ -f ~/.rbenv_startup ] || source ~/.rbenv_startup
+if [ -f ~/.rbenv_startup ]; then source ~/.rbenv_startup fi
 
 # export PATH="$HOME/.rbenv/bin:$PATH"
 # eval "$(rbenv init -)"
