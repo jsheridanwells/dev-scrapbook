@@ -4,8 +4,8 @@
 export ZSH="/home/jsheridanwells/.oh-my-zsh"
 
 # oh-my-zsh theme
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="arrow"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="arrow"
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
 # Uncomment the following line to display red dots whilst waiting for completion.
