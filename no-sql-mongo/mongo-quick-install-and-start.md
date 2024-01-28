@@ -6,6 +6,7 @@ _This is for Ubuntu Jammy on WSL2_
    - Create the actual mongod command: `sudo nano /etc/init.d/mongod`
    - Paste in [these contents](https://raw.githubusercontent.com/mongodb/mongo/master/debian/init.d)
    - Make it executable: `sudo chmod +x /etc/init.d/mongod`
+   - Also this: `sudo chown mongodb:mongodb /var/run/mongod.pid`
    - Test: `sudo service mongod start`
 
 CLI Reference:
