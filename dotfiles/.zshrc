@@ -1,13 +1,21 @@
-# Last update 2021-02-03 -@jsheridanwells
+# Last update 2024-11-08 -@jsheridanwells
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/jsheridanwells/.oh-my-zsh"
-
+export PATH=$PATH:/home/jsheridanwells/.local/bin
+eval "$(oh-my-posh init zsh --config /home/jsheridanwells/oh-my-posh-extras/stelbent.minimal.omp.json)"
 # oh-my-zsh theme
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="passion"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 # ZSH_THEME="arrow"
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
 # oh-my-zsh plugins
@@ -19,10 +27,13 @@ source $ZSH/oh-my-zsh.sh
 alias c="clear"
 alias l="ls -la"
 alias wr="cd /mnt/c/Users/jsheridanwells"
-alias ws="webstorm . </dev/null &>/dev/null &"
 alias h="history"
 alias hg="history grep | "
 alias cv="command -v"
+alias vi="vim"
+alias v="vim"
+alias omp="oh-my-posh"
+
 
 # GETTING AROUND
 alias repo="pushd ~/workspace && clear && ls"
@@ -64,12 +75,15 @@ alias nid="npm install --save-dev"
 alias nig="npm install -g"
 alias nun="npm uninstall --save"
 
+# 11ty ALIASES
+alias ety="npx @11ty/eleventy"
+
 # PYTHON ALIASES
 alias py="python3"
 alias python="python3"
 alias vact=". venv/bin/activate"
 
-#DOTNET ALIASES
+#DOTNET ALIASES, ETC
 alias dn="dotnet"
 alias dna="dotnet add"
 alias dnap="dotnet add package"
@@ -77,10 +91,14 @@ alias dnres="dotnet restore"
 alias dnr="dotnet run"
 alias dnwr="dotnet watch run"
 alias dnb="dotnet build"
+export PATH="$HOME/.dotnet/tools:$PATH"
 
 # RUBY BUNDLER &/| JEKYLL
+# Install Ruby Gems to ~/gems' 
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
 alias be="bundle exec"
-alias js="bundle exec jekyll serve"
+alias js="bundle exec jekyll serve --livereload"
 alias jst="JEKYLL_ENV=test bundle exec jekyll serve"
 alias jsp="JEKYLL_ENV=production bundle exec jekyll serve"
 
@@ -98,32 +116,6 @@ autoload -U compinit && compinit -u
 export DISPLAY=${DISPLAY:-$(grep -Po '(?<=nameserver ).*' /etc/resolv.conf):0}
 export LIBGL_ALWAYS_INDIRECT=1
 
-### nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-### use .nvmrc if found
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
-
 ### rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
@@ -139,3 +131,19 @@ autoload -U compinit && compinit -u
 
 ## Temp abbreviations for active projects
 alias bd="cd ~/workspace/projects/BeautifulDay && vi ."
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
